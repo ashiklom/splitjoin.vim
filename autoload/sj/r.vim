@@ -16,7 +16,8 @@ function! sj#r#SplitFuncall()
   let items = map(items, {k, v -> v . (k+1 < len(items) ? "," : "")})
 
   let r_indent_align_args = get(g:, 'r_indent_align_args', 1)
-  if r_indent_align_args && len(items)
+  let r_indent_rstudio = get(g:, 'r_indent_rstudio', 1)
+  if r_indent_align_args && !r_indent_rstudio && len(items)
     let items[0]  = "(" . items[0]
     let items[-1] = items[-1] . ")"
     let lines = items
